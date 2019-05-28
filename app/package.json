@@ -1,0 +1,13 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "description": "TODO App FE",
+    "scripts": {
+        "start": "npx http-server"
+    },
+    "devDependencies": {},
+    "dependencies": {
+        "angular": "1.7.8",
+        "bootstrap": "4.3.1"
+    }
+}
