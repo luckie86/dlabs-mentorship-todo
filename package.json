@@ -4,7 +4,7 @@
     "scripts": {
         "api:install": "cd api && npm i",
         "app:install": "cd app && npm i",
-        "api:start": "cd app && npm start",
+        "api:start": "cd api && npm start",
         "app:start": "cd app && npm start",
         "start": "npm run api:install && npm run app:install"
     }
