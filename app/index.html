@@ -7,26 +7,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-
-    <link rel="stylesheet" href="app/app.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="icon" type="image/png" href="assets/img/todo.png">
 </head>
 
 <body>
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-sm">
-                <div class="alert alert-primary" role="alert">
-                    Hello World
-                </div>
-            </div>
-        </div>
-    </div>
+    <ui-view></ui-view>
 
     <!-- JS -->
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 
-    <script src="app/app.module.js"></script>
+    <script src="app.module.js"></script>
+    <script src="core/core.module.js"></script>
+    <script src="main/main.module.js"></script>
+    <script src="shared/shared.module.js"></script>
+    <script src="login/login.module.js"></script>
+    <script src="login/login.nav.js"></script>
+    <script src="login/login-component/login.component.js"></script>
 </body>
 
 </html>
