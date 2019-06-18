@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.task">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="$ctrl.addTask()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Task</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="list-group" ng-show="$ctrl.tasks.length">
+                <li class="list-group-item" ng-repeat="todo in $ctrl.tasks"> 
+                    <p class="">{{todo.task}}</p>
+                    <div class="">
+                        <button 
+                            class="btn btn-warning" 
+                            ng-click="$ctrl.editTask($index)"
+                            ui-sref="todo.edit"
+                        >
+                            Edit 
+                        </button>
+                        <button 
+                            ng-click="$ctrl.doneTask($index)" 
+                            class="btn btn-success" 
+                            ng-show="!todo.done"
+                        >
+                            Done
+                        </button>
+                        <button
+                            ng-click="$ctrl.unDoneTask($index)" 
+                            class="btn btn-primary" 
+                            ng-show="todo.done"
+                        >
+                            Undo 
+                        </button>
+                        <button 
+                            class="btn btn-danger"
+                            ng-click="$ctrl.deleteTask($index)"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div
+            ng-repeat="task in $ctrl.tasks"
+            ng-if="$ctrl.tasks[$index].edit" 
+            class="col-6">
+            <div class="card">
+                <ui-view
+                    index="$index"
+                >
+                </ui-view>
+            </div>
+        </div>
+        
+    </div>
+</div>    

@@ -1,0 +1,34 @@
+<div ng-repeat="task in $ctrl.tasks">
+    <div ng-if="task.edit">
+        <div class="form">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="$ctrl.task" placeholder="$ctrl.task">
+            </div>
+        </div>
+        <ul class="list-group" >
+            <li class="list-group-item" ng-show="task.edit"> 
+                <p class="">{{task.task}}</p>
+                <div class="">
+                    <button 
+                        class="btn btn-warning" 
+                        ng-click="$ctrl.editTask($index)"
+                    >
+                        Update 
+                    </button>
+                    <button 
+                        ng-click="$ctrl.close($index)" 
+                        class="btn btn-primary"
+                    >
+                        Close
+                    </button>
+                    <button 
+                        class="btn btn-danger"
+                        ng-click="$ctrl.deleteTask($index)"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
