@@ -12,25 +12,21 @@
         .module('LoginModule')
         .component('loginComponent', loginComponent);
 
-    function loginController() {
+    function loginController(userService, $location) {
         
         var $ctrl = this;
-
-        $ctrl.$onInit = $onInit;
 
         $ctrl.login = login;
         
         //////////////////////////////
         
-        function $onInit () {
- 
-            
-        }
+        
 
         function login () {
-
-
-
+            var currentUser = userService.checkUser($ctrl.userName, $ctrl.password);
+            if (currentUser) {
+                $location.path('/todo');
+            }
         }
 
     }
