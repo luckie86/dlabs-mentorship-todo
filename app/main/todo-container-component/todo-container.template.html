@@ -20,7 +20,7 @@
                         <button 
                             class="btn btn-warning" 
                             ng-click="$ctrl.editTask($index)"
-                            ui-sref="todo.edit"
+                            ui-sref="todo.edit.id({ todoId: $index })"
                         >
                             Edit 
                         </button>
