@@ -23,19 +23,39 @@
         //////////////////////////////
         
         function login () {
-            $http.get("http://localhost:3000/auth/login")
+            $http.post("http://localhost:3000/auth/login", { 
+                userName: $ctrl.userName, 
+                password: $ctrl.password 
+            })
                 .then(function(response) {
-                    console.log(response.data);
+                    console.log(response.status);
+                    if (response.status == 200) {
+                        $location.path('/todo');
+                    } else {
+                        $location.path('/login');
+                    }
             });
         }
 
         function register () {
-            $http.get("http://localhost:3000/auth/register")
+            $http.post("http://localhost:3000/auth/register", {
+                id: randomId(),
+                userName: $ctrl.userName,
+                password: $ctrl.password
+            })
                 .then(function(response) {
-                    console.log(response.data);
+                    if (response.config.data) {
+                        $location.path('/todo');
+                    } else {
+                        $location.path('/login');
+                    }
             });
         }
 
+        function randomId () {
+            var Id = Math.floor(Math.random()*1000);
+            return Id;
+        }
     }
 
 })();
