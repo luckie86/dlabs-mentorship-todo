@@ -28,7 +28,6 @@
                 password: $ctrl.password 
             })
                 .then(function(response) {
-                    console.log(response.status);
                     if (response.status == 200) {
                         $location.path('/todo');
                     } else {

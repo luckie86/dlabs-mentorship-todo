@@ -23,18 +23,16 @@ class UsersService {
         });
     }
 
-    getUser(currentUserName, currentUserPassword) {
-        fs.readFileSync('DB.json', 'utf8', function readFileCallback(err, data){
+    getUser(currentUserName, currentUserPassword, callback) {
+        fs.readFile('DB.json', 'utf8', function readFileCallback(err, data){
             if (err) {
                 console.log(err);
             } else {
             var obj = JSON.parse(data);
-            var userMatch; 
             obj.table.forEach(user => {
                 if(user.user == currentUserName && user.password == currentUserPassword) {
-                    console.log(user);
-                    userMatch = user;
-                    return userMatch;
+                    callback(user);
+                    return user;
                 }
             });
         }});

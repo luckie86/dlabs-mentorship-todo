@@ -8,14 +8,15 @@ var usersService = new UsersService();
 router.post('/', function(req, res, next) {
     var userName = req.body.userName;
     var password = req.body.password;
-    var checkUserFromDB = usersService.getUser(userName, password);
-    console.log("user exists", checkUserFromDB);
-    if (checkUserFromDB.userName == userName && checkUserFromDB.password == password) {
-        res.sendStatus(200);    
-    } else {
-        res.sendStatus(401);
-    }
-    
+    var checkUserFromDB;
+    usersService.getUser(userName, password, function(user) {
+        checkUserFromDB = user;
+        if (checkUserFromDB.user == userName && checkUserFromDB.password == password) {
+            res.sendStatus(200);    
+        } else {
+            res.sendStatus(401);
+        }     
+    });
 });
 
 module.exports = router;
