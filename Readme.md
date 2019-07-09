@@ -25,3 +25,13 @@
 - middleware on routes to check auth
 - bonus:
     - persistant json file as storage
+
+
+// REMAINING TODO'S:
+
+✓  baza shrani vec userjev
+✓  routing na apiju za todo/1 todo/2 
+3. password hash
+4. jwt + middleware + interceptor + localstorage
+5. promisi na apiju
+6. res.send brez return

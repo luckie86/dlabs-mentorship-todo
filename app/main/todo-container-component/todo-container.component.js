@@ -12,7 +12,7 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, $scope) {
+    function todoContainerController(todoService, $http, $location) {
         
         var $ctrl = this;
 
@@ -40,11 +40,33 @@
 
         function addTask () {
             todoService.saveTodos({task: $ctrl.task, done: false, edit: false});
+            
+            $http.post("http://localhost:3000/todo", { 
+                id: 0, 
+                text: $ctrl.task,
+                userId: 0
+            })
+            .then(function(response) {
+                if (response.status == 200) {
+                    $location.path('/todo');
+                } else {
+                    $location.path('/login');
+                }
+            });
         }
             
         function editTask (index) {
             $ctrl.tasks[index].edit = true;
             todoService.updateTask(index, $ctrl.task, true);
+
+            $http.get("http://localhost:3000/todo/edit/"+index)
+            .then(function(response) {
+                if (response.status == 200) {
+                    $location.path('/todo/edit/index');
+                } else {
+                    $location.path('/login');
+                }
+            });
         }
 
         function doneTask (index) {
@@ -57,6 +79,16 @@
 
         function deleteTask (index) {
             todoService.deleteTask(index);
+
+            $http.get("http://localhost:3000/todo/delete/"+index)
+            .then(function(response) {
+                if (response.status == 200) {
+                    $location.path('/todo');
+                } else {
+                    $location.path('/login');
+                }
+            });
+
         }
 
     }

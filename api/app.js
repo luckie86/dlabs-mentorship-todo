@@ -5,11 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var dbHelper = require('./private/DBHelper');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users/users');
 var registerRouter = require('./routes/auth/register/register');
 var loginRouter = require('./routes/auth/login/login');
+var todoRoute = require('./routes/todo/todo');
 
 var app = express();
 app.use(cors());
@@ -22,11 +24,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// var dbHelper = new DBHelper();
+setTimeout(()=> {
+    console.log(dbHelper.getModel())
+
+}, 200)
+
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth/register', registerRouter);
 app.use('/auth/login', loginRouter);
+app.use('/todo', todoRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
