@@ -74,9 +74,18 @@ class DBHelper {
 
     deleteTodo (index) {
         let currentModel = this.model;
-        let todos = currentModel.todos.filter((item) => item.id !== index);       
-        currentModel.todos = todos;
+        let newTodos = currentModel.todos.filter((item) => item.id !== index);       
+        currentModel.todos = newTodos;
         this.saveModel(currentModel);    
+    }
+
+    editTodo (index, newTodo) {
+        let currentModel = this.model;
+        let todoToEdit = currentModel.todos.filter((item) => item.id === index);
+        currentModel.todos.splice(index, 1);
+        todoToEdit[0].todo = newTodo.newTodo;
+        currentModel.todos.push(todoToEdit[0]);
+        this.saveModel(currentModel);
     }
 
 }

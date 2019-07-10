@@ -11,23 +11,32 @@ router.get('/', function(req, res, next) {
     res.status(200).send(todo1.text);
 });
 
-router.get('/edit', function(req, res, next) {
+//  Save todo
+router.post('/save', function (req, res, next) {
     
-    return res.status(200).send({msg:"edit"});
 });
 
+// Edit todo with id
+router.post('/edit/:id', function(req, res, next) {
+    let id = parseInt(req.params.id, 10);
+    let newTodo = req.body;
+    dbHelper.editTodo(id, newTodo);
+    return res.status(200).send({message: "successfuly edited"});
+});
+
+// Delete todo with id
 router.get('/delete/:id', function(req, res, next) {
-    var id = parseInt(req.params.id, 10);
+    let id = parseInt(req.params.id, 10);
     dbHelper.deleteTodo(id);
     return res.status(200).send({message: "successfuly deleted"});
 });
 
 /* GET todo. */
 router.get('/:id', function(req, res, next) {
-    var id = parseInt(req.params.id, 10);
+    let id = parseInt(req.params.id, 10);
     if (!typeof id == "number" || id !== null) {
-        var todos = dbHelper.getTodos();
-        var todo = todos.find((todo) => todo.id === id) || {};
+        let todos = dbHelper.getTodos();
+        let todo = todos.find((todo) => todo.id === id) || {};
         return res.status(200).send(todo);
     } else {
         res.sendStatus(404);

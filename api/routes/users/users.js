@@ -3,12 +3,10 @@ var router = express.Router();
 
 var dbHelper = require('../../private/DBHelper');
 
-/* GET user. */
+/* GET users. */
 router.get('/', function(req, res, next) {
-    var data = req.body;
-    var users = dbHelper.getUsers();
-    var user = users.find((user) => user.id === data.id);
-    res.status(200).send(user);
+    var users = dbHelper.getUsers(); 
+    res.status(200).send(users);
 });
 
 

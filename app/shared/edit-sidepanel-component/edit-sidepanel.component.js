@@ -13,7 +13,7 @@
         .module('SharedModule')
         .component('editSidePanelComponent', editSidePanelComponent);
 
-    function editSidePanelController(todoService) {
+    function editSidePanelController(todoService, $http, $location) {
         
         var $ctrl = this;
 
@@ -37,6 +37,18 @@
         function editTask () {
             todoService.updateTask($ctrl.index, $ctrl.task, true);
             todoService.closeTaskEditor($ctrl.index, false);
+
+            $http.post("http://localhost:3000/todo/edit/"+$ctrl.index, {
+                newTodo: $ctrl.task
+            })
+            .then(function(response) {
+                if (response.status == 200) {
+                    $location.path('/todo');
+                } else {
+                    $location.path('/login');
+                }
+            });
+
         }
 
         function close (index) {
@@ -45,6 +57,15 @@
 
         function deleteTask (index) {
             todoService.deleteTask(index);
+
+            $http.get("http://localhost:3000/todo/delete/"+index)
+            .then(function(response) {
+                if (response.status == 200) {
+                    $location.path('/todo');
+                } else {
+                    $location.path('/login');
+                }
+            });
         }
 
     }
