@@ -31,7 +31,9 @@
 
 ✓  baza shrani vec userjev
 ✓  routing na apiju za todo/1 todo/2 
-3. password hash
-4. jwt + middleware + interceptor + localstorage
-5. promisi na apiju
-6. res.send brez return
+✓  password hash
+-  jwt + middleware + interceptor + localstorage
+-  promisi na apiju
+-  res.send brez return
+-  RESTFUL API'S (poprabi put delete patch)
+-  implementiraj bcrypt

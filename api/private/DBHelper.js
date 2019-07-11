@@ -70,7 +70,8 @@ class DBHelper {
             return this.model.todos;
         } else {
             return this.model.todos;
-        }    }
+        }    
+    }
 
     deleteTodo (index) {
         let currentModel = this.model;
@@ -86,6 +87,13 @@ class DBHelper {
         todoToEdit[0].todo = newTodo.newTodo;
         currentModel.todos.push(todoToEdit[0]);
         this.saveModel(currentModel);
+    }
+
+    saveTodo (userId, todo) {
+        let currentModel = this.model;
+        currentModel.todos.push(todo);
+
+        // this.saveModel(currentModel);
     }
 
 }

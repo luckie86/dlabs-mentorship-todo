@@ -1,8 +1,1 @@
-{"users":[{"id":815,"user":"luka","password":"brinar","datetime":"2019-07-08T13:10:50.376Z"},
-    {"id":718,"user":"janez","password":"novak","timestamp":"2019-07-08T13:54:03.629Z"},
-    {"id":248,"user":"nina","password":"novak","timestamp":"2019-07-09T06:45:29.055Z"}],
-    "todos":[{"id":0,"todo":"buy beer","userId":0},
-        {"id":1,"todo":"buy milk","userId":0},
-        {"id":2,"todo":"buy salad","userId":0},
-        {"id":3,"todo":"buy car","userId":0},
-        {"id":4,"todo":"buy fireworks","userId":0}]}
+{"users":[{"id":815,"user":"luka","password":"brinar","datetime":"2019-07-08T13:10:50.376Z"},{"id":718,"user":"janez","password":"novak","timestamp":"2019-07-08T13:54:03.629Z"},{"id":248,"user":"nina","password":"novak","timestamp":"2019-07-09T06:45:29.055Z"},{"id":436,"user":"tina","password":"d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3","timestamp":"2019-07-11T07:54:17.482Z"}],"todos":[{"id":0,"todo":"buy beer","userId":0},{"id":1,"todo":"buy milk","userId":0},{"id":2,"todo":"buy salad","userId":0},{"id":3,"todo":"buy car","userId":0},{"id":4,"todo":"buy fireworks","userId":0}]}

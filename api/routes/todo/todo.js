@@ -13,7 +13,9 @@ router.get('/', function(req, res, next) {
 
 //  Save todo
 router.post('/save', function (req, res, next) {
-    
+
+    // naredi save
+
 });
 
 // Edit todo with id
