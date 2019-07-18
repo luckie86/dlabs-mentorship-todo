@@ -22,13 +22,23 @@
         
         //////////////////////////////
         
+        // on init
+
+        // pogledaš v local storage in preveriš če je tam, v tem primeru ga redidrektaš na /todo
+        // v nasporotnem pa na /login
+
+
         function login () {
             $http.post("http://localhost:3000/auth/login", { 
                 userName: $ctrl.userName, 
                 password: $ctrl.password 
             })
                 .then(function(response) {
+                    console.log(response);
                     if (response.status == 200) {
+                        // if response.data
+                        // shrani v localstraoge dato
+                        // dodaš nek key
                         $location.path('/todo');
                     } else {
                         $location.path('/login');
