@@ -34,11 +34,8 @@
                 password: $ctrl.password 
             })
                 .then(function(response) {
-                    console.log(response);
                     if (response.status == 200) {
-                        // if response.data
-                        // shrani v localstraoge dato
-                        // dodaš nek key
+                        window.localStorage.setItem("token",response.data);
                         $location.path('/todo');
                     } else {
                         $location.path('/login');
@@ -53,7 +50,8 @@
                 password: $ctrl.password
             })
                 .then(function(response) {
-                    if (response.config.data) {
+                    if (response.status == 200) {
+                        window.localStorage.setItem("token", response.data);
                         $location.path('/todo');
                     } else {
                         $location.path('/login');

@@ -6,8 +6,8 @@ var hashedPrivateKey = securityHelper.createHash(privateKey);
 
 class JWTHelper {
 
-    createJWT (data, callback) {
-        jwt.sign(data, hashedPrivateKey, { algorithm: 'HS256' }, function(err, token) {
+    createJWT(data, callback) {
+        jwt.sign(data, hashedPrivateKey, { algorithm: 'HS256' }, function (err, token) {
             if (err) {
                 console.log(err);
             } else {
@@ -17,7 +17,7 @@ class JWTHelper {
         });
     }
 
-    decodeJWT (token) {
+    decodeJWT(token) {
         jwt.verify(token, hashedPrivateKey, function (err, decoded) {
             if (err) {
                 console.log(err);
@@ -25,6 +25,20 @@ class JWTHelper {
                 console.log(decoded);
                 return decoded;
             }
+        });
+    }
+
+
+    createJWTwithPromise(data) {
+        return new Promise(function (resolve, reject) {
+            jwt.sign(data, hashedPrivateKey, { algorithm: 'HS256' }, function (err, token) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(token);
+                }
+            })
+
         });
     }
 

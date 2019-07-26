@@ -2,12 +2,25 @@ var express = require('express');
 var router = express.Router();
 
 var dbHelper = require('../../private/DBHelper');
+var JWTHelper = require('../../private/JWTHelper');
+
+router.use('/', function(req,res,next){
+    if (req.headers.token) {
+        // use JWT HELPER TO FIND OUT IF USER HAS RIGHT TOKEN
+        var decoded = JWTHelper.decodeJWT(req.headers.token);
+        if(decoded) {
+            console.log(decoded);
+            next()
+        }
+    }
+    next("no token found"); 
+});
 
 /* GET todo. */
 router.get('/', function(req, res, next) {
     var data = req.body;
     var todos = dbHelper.getTodos();
-    var todo1 = todos.find((todo) => todo.id === data.id)
+    var todo1 = todos.find((todo) => todo.id === data.id) || {}
     res.status(200).send(todo1.text);
 });
 
