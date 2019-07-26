@@ -16,16 +16,12 @@ router.post('/', function(req, res, next) {
             userId: user.id,
             userName: user.user,
         }
-        // JWTHelper.createJWT(userToken, (token) => {
-        //     res.status(200).send(token);
-        // } );
         
         JWTHelper.createJWTwithPromise(userToken)
             .then((token) => {
                 res.status(200).send(token);
             })
             .catch((err)=> {
-                console.log(err);
                 res.status(400).send(err);
             });
 

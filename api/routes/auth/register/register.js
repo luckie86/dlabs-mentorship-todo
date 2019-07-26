@@ -18,11 +18,14 @@ router.post('/', function(req, res, next) {
             userId: data.id,
             userName: data.userName,
         }
-        JWTHelper.createJWT(userToken, (token) => {
-            if (token) {
-                return res.status(200).send(token);
-            }
-        });
+        
+        JWTHelper.createJWTwithPromise(userToken)
+            .then((token) => {
+                res.status(200).send(token);
+            })
+            .catch((err)=> {
+                res.status(400).send(err);
+            });
     }
 
 });
