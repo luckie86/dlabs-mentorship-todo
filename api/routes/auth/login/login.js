@@ -9,22 +9,36 @@ router.post('/', function(req, res, next) {
     let userName = req.body.userName;
     let password = req.body.password;
     let users = dbHelper.getUsers();
-    let hashedPassword = securityHelper.createHash(password);
-    let user = users.find((user) => user.user === userName && user.password === hashedPassword);
+    let user = users.find((user) => user.user === userName);
     if (user) {
-        let userToken = {
-            userId: user.id,
-            userName: user.user,
-        }
-        
-        JWTHelper.createJWTwithPromise(userToken)
-            .then((token) => {
-                res.status(200).send(token);
-            })
-            .catch((err)=> {
-                res.status(400).send(err);
-            });
+        securityHelper.compareHash(password, user.password)
+        .then((isPasswordValid) => {
+            console.log(res);
+            if(isPasswordValid) {
+                let userToken = {
+                    userId: user.id,
+                    userName: user.user,
+                }
+                
+                 JWTHelper.createJWTwithPromise(userToken)
+                    .then((token) => {
+                        res.status(200).send(token);
+                    })
+                    .catch((err)=> {
+                        res.status(400).send(err);
+                    });
+            } else {
+                // return res.sendStatus(401);
+                throw "invalid login";
 
+            }
+    
+        })
+        .catch((err)=>{
+            console.log(err);
+            res.status(400).send(err);
+        })
+        
 
     } else {
         res.sendStatus(401);
@@ -32,3 +46,12 @@ router.post('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+
+/*
+
+compareHash()
+    .then(...)
+    .then(...)
+    .then(...)
+    .catch(...) */

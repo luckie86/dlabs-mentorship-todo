@@ -33,7 +33,9 @@
 ✓  routing na apiju za todo/1 todo/2 
 ✓  password hash
 ✓  jwt + middleware + interceptor + localstorage
--  promisi na apiju
--  res.send brez return
+✓  promisi na apiju
+-   res.send brez return
 -  RESTFUL API'S (poprabi put delete patch)
 -  implementiraj bcrypt
+-  codecleanup (ni anonimih funckij) popravi naming
+✓  Implementiraj bcrypt v login, register routo (naredi dve metodi v security helperju create hash pa compoare hash ki vrneta promise)

@@ -9,24 +9,28 @@ var JWTHelper = require('../../../private/JWTHelper');
 router.post('/', function(req, res, next) {
     let data = req.body;
     let timeStamp = new Date(Date.now());
-    let hashedPassword = securityHelper.createHash(data.password);
-    
-
-    if (data) {
-        dbHelper.updateModel({ id: data.id, user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
-        let userToken = {
-            userId: data.id,
-            userName: data.userName,
+    securityHelper.createBcryptHash(data.password).then((hashedPassword) => {
+        if (data) {
+            dbHelper.updateModel({ id: data.id, user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
+            let userToken = {
+                userId: data.id,
+                userName: data.userName,
+            }
+            
+            JWTHelper.createJWTwithPromise(userToken)
+                .then((token) => {
+                    res.status(200).send(token);
+                })
+                .catch((err)=> {
+                    res.status(400).send(err);
+                });
         }
-        
-        JWTHelper.createJWTwithPromise(userToken)
-            .then((token) => {
-                res.status(200).send(token);
-            })
-            .catch((err)=> {
-                res.status(400).send(err);
-            });
-    }
+    }).catch((err) => {
+        console.log(err);
+    }); 
+
+
+    
 
 });
 

@@ -8,5 +8,8 @@
         "api:start:debug": "cd api && npm run start-debug",
         "app:start": "cd app && npm start",
         "start": "npm run api:install && npm run app:install"
+    },
+    "dependencies": {
+        "bcrypt": "^3.0.6"
     }
 }

@@ -5,15 +5,16 @@ var dbHelper = require('../../private/DBHelper');
 var JWTHelper = require('../../private/JWTHelper');
 
 router.use('/', function(req,res,next){
-    if (req.headers.token) {
-        // use JWT HELPER TO FIND OUT IF USER HAS RIGHT TOKEN
-        var decoded = JWTHelper.decodeJWT(req.headers.token);
-        if(decoded) {
-            console.log(decoded);
-            next()
-        }
-    }
-    next("no token found"); 
+    next() 
+//     if (req.headers.token) {
+//         // use JWT HELPER TO FIND OUT IF USER HAS RIGHT TOKEN
+//         var decoded = JWTHelper.decodeJWT(req.headers.token);
+//         if(decoded) {
+//             console.log(decoded);
+//             next()
+//         }
+//     }
+//     next("no token found"); 
 });
 
 /* GET todo. */
@@ -56,6 +57,8 @@ router.get('/:id', function(req, res, next) {
     } else {
         res.sendStatus(404);
     }
+    console.log("kr neki");
+    res.sendStatus(200);
 });
 
 // POST todo
