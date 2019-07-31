@@ -6,15 +6,17 @@ var hashedPrivateKey = securityHelper.createHash(privateKey);
 
 class JWTHelper {
 
-    decodeJWT(token) {
-        jwt.verify(token, hashedPrivateKey, function (err, decoded) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(decoded);
-                return decoded;
-            }
-        });
+    decodeJWTwithPromise(token) {
+        return new Promise (function (resolve, reject) {
+            jwt.verify(token, hashedPrivateKey, function (err, decoded) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(decoded);
+                }
+            });
+        })
+        
     }
 
 

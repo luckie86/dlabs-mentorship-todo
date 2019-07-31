@@ -13,7 +13,6 @@ router.post('/', function(req, res, next) {
     if (user) {
         securityHelper.compareHash(password, user.password)
         .then((isPasswordValid) => {
-            console.log(res);
             if(isPasswordValid) {
                 let userToken = {
                     userId: user.id,

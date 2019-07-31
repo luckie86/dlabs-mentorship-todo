@@ -39,3 +39,4 @@
 -  implementiraj bcrypt
 -  codecleanup (ni anonimih funckij) popravi naming
 ✓  Implementiraj bcrypt v login, register routo (naredi dve metodi v security helperju create hash pa compoare hash ki vrneta promise)
+-  Spremeni frontend da bo bral iz DB Json todoje

@@ -4,17 +4,20 @@ var router = express.Router();
 var dbHelper = require('../../private/DBHelper');
 var JWTHelper = require('../../private/JWTHelper');
 
-router.use('/', function(req,res,next){
-    next() 
-//     if (req.headers.token) {
-//         // use JWT HELPER TO FIND OUT IF USER HAS RIGHT TOKEN
-//         var decoded = JWTHelper.decodeJWT(req.headers.token);
-//         if(decoded) {
-//             console.log(decoded);
-//             next()
-//         }
-//     }
-//     next("no token found"); 
+router.use('/', function(req,res,next){ 
+    if (req.headers.token) {
+        JWTHelper.decodeJWTwithPromise(req.headers.token)
+            .then((token) => {
+                req.decodedToken = token;
+                next();
+            })
+            .catch((err)=> {
+                next(err);
+            });
+    } else {
+        next("no token found");
+    }
+     
 });
 
 /* GET todo. */
