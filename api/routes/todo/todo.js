@@ -20,6 +20,12 @@ router.use('/', function(req,res,next){
      
 });
 
+/* GET todos. */
+router.get('/', function(req, res, next) {
+    var todos = dbHelper.getTodos();
+    res.status(200).send(todos);
+});
+
 /* GET todo. */
 router.get('/', function(req, res, next) {
     var data = req.body;

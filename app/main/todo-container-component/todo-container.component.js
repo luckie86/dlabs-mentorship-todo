@@ -12,13 +12,13 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, $http, $location) {
+    function todoContainerController(todoService, $scope, $http, $location) {
         
         var $ctrl = this;
 
         $ctrl.task = $ctrl.task;
         
-        $ctrl.tasks;
+        $ctrl.tasks = [];
 
         $ctrl.$onInit = onInit;
 
@@ -35,7 +35,11 @@
         //////////////////////////////
 
         function onInit () {
-            $ctrl.tasks = todoService.getTodos();
+            todoService.getTodos()
+                .then((response)=>{
+                    $ctrl.tasks = response;
+                    $scope.$apply();
+                });
         }
 
         function addTask () {

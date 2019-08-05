@@ -5,7 +5,7 @@
         .module('CoreModule')
         .factory("todoService", todoService);
     
-        function todoService () {
+        function todoService ($http) {
             var arrayOfTodos = [];
             
             function saveTodos (todo) {
@@ -13,7 +13,18 @@
             }
 
             function getTodos () {
-               return arrayOfTodos;
+                return new Promise (function (resolve, reject) {
+                    $http.get("http://localhost:3000/todo")
+                        .then(function(response){
+                        if (response) {
+                            arrayOfTodos.push(response.data);
+                            resolve(response.data)
+                        } else {
+                            reject(response)
+                        }
+                    });
+                });
+               
             }
 
             function getTodo (index) {
