@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+var uuidv4 = require("uuid/v4");
+
 var dbHelper = require('../../private/DBHelper');
 var JWTHelper = require('../../private/JWTHelper');
 
 router.use('/', function(req,res,next){ 
+    // return next();
     if (req.headers.token) {
         JWTHelper.decodeJWTwithPromise(req.headers.token)
             .then((token) => {
@@ -22,28 +25,38 @@ router.use('/', function(req,res,next){
 
 /* GET todos. */
 router.get('/', function(req, res, next) {
-    var todos = dbHelper.getTodos();
-    res.status(200).send(todos);
+    if (req.decodedToken) {
+        var todos = dbHelper.getTodos();
+        var todosFromCurrentUser = todos.filter((todo)=>{return todo.userId === req.decodedToken.userId});
+        res.status(200).send(todosFromCurrentUser);
+    } else {
+        res.sendStatus(401);
+    }
+    
 });
 
 /* GET todo. */
-router.get('/', function(req, res, next) {
-    var data = req.body;
+router.get('/:id', function(req, res, next) {
+    // ne bo potrebno več parseInt ko implementiram UUID
+    let id = req.params.id;
     var todos = dbHelper.getTodos();
-    var todo1 = todos.find((todo) => todo.id === data.id) || {}
-    res.status(200).send(todo1.text);
+    var todo1 = todos.find((todo) => todo.id === id) || {}
+    console.log(req.decodedToken);
+    res.status(200).send(todo1);
 });
 
-//  Save todo
+/* SAVE TODO. */
 router.post('/save', function (req, res, next) {
-
-    // naredi save
-
+    var currentUserId = req.decodedToken.userId;
+    var todoUUID = uuidv4();
+    var newTodo = req.body.todo;
+    dbHelper.saveTodo(todoUUID, newTodo, currentUserId);
+    return res.status(200).send({message: "Todo sucesfully saved"});
 });
 
 // Edit todo with id
 router.post('/edit/:id', function(req, res, next) {
-    let id = parseInt(req.params.id, 10);
+    let id = req.params.id
     let newTodo = req.body;
     dbHelper.editTodo(id, newTodo);
     return res.status(200).send({message: "successfuly edited"});
@@ -51,14 +64,14 @@ router.post('/edit/:id', function(req, res, next) {
 
 // Delete todo with id
 router.get('/delete/:id', function(req, res, next) {
-    let id = parseInt(req.params.id, 10);
+    let id = req.params.id
     dbHelper.deleteTodo(id);
     return res.status(200).send({message: "successfuly deleted"});
 });
 
 /* GET todo. */
 router.get('/:id', function(req, res, next) {
-    let id = parseInt(req.params.id, 10);
+    let id = req.params.id
     if (!typeof id == "number" || id !== null) {
         let todos = dbHelper.getTodos();
         let todo = todos.find((todo) => todo.id === id) || {};

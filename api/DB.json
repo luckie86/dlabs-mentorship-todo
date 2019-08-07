@@ -1,1 +1,38 @@
-{"users":[{"id":436,"user":"tina","password":"d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3","timestamp":"2019-07-11T07:54:17.482Z"},{"id":54,"user":"luka","password":"$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW","timestamp":"2019-07-29T14:31:36.033Z"}],"todos":[{"id":0,"todo":"buy beer","userId":0},{"id":1,"todo":"buy milk","userId":0},{"id":2,"todo":"buy salad","userId":0},{"id":3,"todo":"buy car","userId":0},{"id":4,"todo":"buy fireworks","userId":0},{}]}
+{
+    "users": [
+        {
+            "id": 436,
+            "user": "tina",
+            "password": "d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3",
+            "timestamp": "2019-07-11T07:54:17.482Z"
+        },
+        {
+            "id": 54,
+            "user": "luka",
+            "password": "$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW",
+            "timestamp": "2019-07-29T14:31:36.033Z"
+        }
+    ],
+    "todos": [
+        {
+            "id": "edf327e6-9e76-46aa-a0d5-90b650f4332a",
+            "todo": "buy salad",
+            "userId": 54
+        },
+        {
+            "id": "17bf245e-6e70-48d3-8a56-eeca092414c5",
+            "todo": "buy vegetables",
+            "userId": 54
+        },
+        {
+            "id": "3f9989a0-a5ab-4015-b34d-e1b41ed16345",
+            "todo": "buy cactus",
+            "userId": 54
+        },
+        {
+            "id": "4441da7f-86d5-4564-aac4-9bc645a5e7cb",
+            "todo": "buy milk",
+            "userId": 54
+        }
+    ]
+}

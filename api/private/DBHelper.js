@@ -89,11 +89,10 @@ class DBHelper {
         this.saveModel(currentModel);
     }
 
-    saveTodo (userId, todo) {
+    saveTodo(todoUUID, newTodo, currentUserId) {
         let currentModel = this.model;
-        currentModel.todos.push(todo);
-
-        // this.saveModel(currentModel);
+        currentModel.todos.push({id:todoUUID, todo: newTodo, userId: currentUserId});
+        this.saveModel(currentModel);
     }
 
 }

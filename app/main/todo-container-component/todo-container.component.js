@@ -12,7 +12,7 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, $scope, $http, $location) {
+    function todoContainerController(todoService, tokenService, $scope, $http, $location) {
         
         var $ctrl = this;
 
@@ -45,26 +45,20 @@
         function addTask () {
             todoService.saveTodos({task: $ctrl.task, done: false, edit: false});
             
-            // $http.get("http://localhost:3000/users")
-            // .then(function(response){
-            //     console.log(response.data);
-            // });
-            
-            // $http.post("http://localhost:3000/todo/save", { 
-            //     id: randomId(), 
-            //     text: $ctrl.task,
-            //     userId: 0
-            // })
-            // .then(function(response) {
-            //     if (response.status == 200) {
-            //         $location.path('/todo');
-            //     } else {
-            //         $location.path('/login');
-            //     }
-            // });
+            $http.post("http://localhost:3000/todo/save", {  
+                todo: $ctrl.task,
+            })
+            .then(function(response) {
+                if (response.status == 200) {
+                    $scope.$apply()
+                } else {
+                    $location.path('/login');
+                }
+            });
         }
-            
+
         function editTask (index) {
+            // What to do about tracking tasks ($index or randomId()?)
             $ctrl.tasks[index].edit = true;
             todoService.updateTask(index, $ctrl.task, true);
         }
@@ -83,7 +77,7 @@
             $http.get("http://localhost:3000/todo/delete/"+index)
             .then(function(response) {
                 if (response.status == 200) {
-                    $location.path('/todo');
+                    $scope.$apply();
                 } else {
                     $location.path('/login');
                 }

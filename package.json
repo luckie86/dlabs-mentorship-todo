@@ -10,6 +10,7 @@
         "start": "npm run api:install && npm run app:install"
     },
     "dependencies": {
-        "bcrypt": "^3.0.6"
+        "bcrypt": "^3.0.6",
+        "uuid": "^3.3.2"
     }
 }
