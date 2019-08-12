@@ -83,7 +83,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/open-close/:id', function(req, res, next) {
     let currentUserId = req.decodedToken.userId;
-    let status = req.params.status;
+    let status = req.params.edit;
     let uuid = req.params.id;
     let todos = dbHelper.getTodos();
     let todo = todos.find((todo) => todo.uuid === uuid) || {};

@@ -39,18 +39,22 @@
                 });
         }
 
-        function editTask (uuid, task) {
-            todoService.updateTodo(uuid, task, true)
+        function editTask (uuid) {
+            todoService.updateTodo(uuid, $ctrl.task, false, true)
                 .then((response) => {
                     if (response.status === 200) {
                         $scope.$apply();
-                        close(uuid);
                     }
                 });
         }
 
         function closeTaskEditor (uuid) {
-            todoService.updateTodo(uuid, false);
+            todoService.updateTodo(uuid, $ctrl.task, false, false)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
         }
 
         function deleteTodo (uuid) {

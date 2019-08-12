@@ -52,7 +52,10 @@
         }
 
         function editTask (uuid) {
-            todoService.updateTodo(uuid, $ctrl.task, false, true)
+            // HACK ???
+            var filteredTask = $ctrl.tasks.filter((task) => task.uuid === uuid);
+            var task = filteredTask[0].text;
+            todoService.updateTodo(uuid, task, false, true)
                 .then((response) => {
                     if (response.status === 200) {
                         $scope.$apply();
