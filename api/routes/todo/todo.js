@@ -37,11 +37,9 @@ router.get('/', function(req, res, next) {
 
 /* GET todo. */
 router.get('/:id', function(req, res, next) {
-    // ne bo potrebno več parseInt ko implementiram UUID
     let id = req.params.id;
     var todos = dbHelper.getTodos();
-    var todo1 = todos.find((todo) => todo.id === id) || {}
-    console.log(req.decodedToken);
+    var todo1 = todos.find((todo) => todo.uuid === id && req.decodedToken.userId === req.decodedToken.uuid);
     res.status(200).send(todo1);
 });
 
@@ -49,21 +47,27 @@ router.get('/:id', function(req, res, next) {
 router.post('/save', function (req, res, next) {
     var currentUserId = req.decodedToken.userId;
     var todoUUID = uuidv4();
-    var newTodo = req.body.todo;
-    dbHelper.saveTodo(todoUUID, newTodo, currentUserId);
-    return res.status(200).send({message: "Todo sucesfully saved"});
+    var newTodo = req.body.text;
+    var done = req.body.done;
+    var edit = req.body.edit;
+    var save = dbHelper.saveTodo(todoUUID, newTodo, currentUserId, done, edit);
+    if (save) {
+        return res.status(200).send({message: "Todo sucesfully saved"});
+    }
+     return res.sendStatus(400);
 });
 
 // Edit todo with id
 router.post('/edit/:id', function(req, res, next) {
-    let id = req.params.id
+    let currentUserId = req.decodedToken.userId;
+    let uuid = req.params.id;
     let newTodo = req.body;
-    dbHelper.editTodo(id, newTodo);
+    dbHelper.editTodo(uuid, newTodo.text, currentUserId, newTodo.done, newTodo.edit); 
     return res.status(200).send({message: "successfuly edited"});
 });
 
 // Delete todo with id
-router.get('/delete/:id', function(req, res, next) {
+router.post('/delete/:id', function(req, res, next) {
     let id = req.params.id
     dbHelper.deleteTodo(id);
     return res.status(200).send({message: "successfuly deleted"});
@@ -71,23 +75,24 @@ router.get('/delete/:id', function(req, res, next) {
 
 /* GET todo. */
 router.get('/:id', function(req, res, next) {
-    let id = req.params.id
-    if (!typeof id == "number" || id !== null) {
-        let todos = dbHelper.getTodos();
-        let todo = todos.find((todo) => todo.id === id) || {};
-        return res.status(200).send(todo);
-    } else {
-        res.sendStatus(404);
-    }
-    console.log("kr neki");
-    res.sendStatus(200);
+    let uuid = req.params.id;
+    let todos = dbHelper.getTodos();
+    let todo = todos.find((todo) => todo.uuid === uuid) || {};
+    return res.status(200).send(todo);
 });
 
-// POST todo
-router.post('/', function(req, res, next){
-    let data = req.body;
-    dbHelper.updateModel(null, {id: data.id, todo: data.text, userId: data.userId});
-    res.status(200).send({id: data.id, todo: data.text, userId: data.userId});
+router.post('/open-close/:id', function(req, res, next) {
+    let currentUserId = req.decodedToken.userId;
+    let status = req.params.status;
+    let uuid = req.params.id;
+    let todos = dbHelper.getTodos();
+    let todo = todos.find((todo) => todo.uuid === uuid) || {};
+    todo.edit = status;
+    var edit = dbHelper.editTodo(uuid, todo.text, currentUserId, todo.done, todo.edit);
+    if (edit) {
+        return res.status(200).send({message: "You have sucesfully edited todo"});
+    }
+     return res.sendStatus(400);
 });
 
 module.exports = router;

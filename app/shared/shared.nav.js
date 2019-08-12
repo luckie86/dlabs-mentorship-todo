@@ -13,20 +13,20 @@
             component: "editSidePanelComponent"
         }
 
-        var editid = {
-            name: "todo.edit.id",
-            url: "/{todoId}",
+        var edituuid = {
+            name: "todo.edit.uuid",
+            url: "/{uuid}",
             component: "editSidePanelComponent",
             resolve: {
-                todoId: function ($transition$) {
-                    return $transition$.params().todoId;
+                uuid: function ($transition$) {
+                    return $transition$.params().uuid;
                 }
             }
         }
                
         $stateProvider.state(edit);
-        $stateProvider.state(editid);
-        $urlRouterProvider.otherwise('/');
+        $stateProvider.state(edituuid);
+        $urlRouterProvider.otherwise('/login');
     }
 
 })();

@@ -30,65 +30,63 @@
 
         $ctrl.unDoneTask = unDoneTask;
 
-        $ctrl.deleteTask = deleteTask;
+        $ctrl.deleteTodo = deleteTodo;
         
         //////////////////////////////
 
         function onInit () {
             todoService.getTodos()
-                .then((response)=>{
+                .then((response) => {
                     $ctrl.tasks = response;
                     $scope.$apply();
                 });
         }
 
         function addTask () {
-            todoService.saveTodos({task: $ctrl.task, done: false, edit: false});
-            
-            $http.post("http://localhost:3000/todo/save", {  
-                todo: $ctrl.task,
-            })
-            .then(function(response) {
-                if (response.status == 200) {
-                    $scope.$apply()
-                } else {
-                    $location.path('/login');
-                }
-            });
+            todoService.saveTodo($ctrl.task)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
         }
 
-        function editTask (index) {
-            // What to do about tracking tasks ($index or randomId()?)
-            $ctrl.tasks[index].edit = true;
-            todoService.updateTask(index, $ctrl.task, true);
+        function editTask (uuid) {
+            todoService.updateTodo(uuid, $ctrl.task, false, true)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
         }
 
-        function doneTask (index) {
-            $ctrl.tasks[index].done = true;
-        }
-
-        function unDoneTask (index) {
-            $ctrl.tasks[index].done = false;
-        }
-
-        function deleteTask (index) {
-            todoService.deleteTask(index);
-
-            $http.get("http://localhost:3000/todo/delete/"+index)
-            .then(function(response) {
-                if (response.status == 200) {
+        function doneTask (uuid) {
+            todoService.updateTodo(uuid, $ctrl.task, true, false)
+            .then((response) => {
+                if (response.status === 200) {
                     $scope.$apply();
-                } else {
-                    $location.path('/login');
                 }
             });
         }
-        
-        function randomId() {
-            let randomId = Math.floor(Math.random()*1000);
-            return randomId;
+
+        function unDoneTask (uuid) {
+            todoService.updateTodo(uuid, $ctrl.task, false, false)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
         }
 
+        function deleteTodo (uuid) {
+            todoService.deleteTodo(uuid)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
+        }
+           
     }
 
 })();

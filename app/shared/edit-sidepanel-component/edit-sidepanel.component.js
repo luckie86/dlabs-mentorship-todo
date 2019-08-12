@@ -3,7 +3,7 @@
 
     var editSidePanelComponent = {
         bindings: {
-            index: "<"
+            uuid: "<"
         },
         templateUrl: 'shared/edit-sidepanel-component/edit-sidepanel.template.html',
         controller: editSidePanelController
@@ -13,59 +13,53 @@
         .module('SharedModule')
         .component('editSidePanelComponent', editSidePanelComponent);
 
-    function editSidePanelController(todoService, $http, $location) {
+    function editSidePanelController(todoService, $http, $location, $scope) {
         
         var $ctrl = this;
 
-        $ctrl.$onChanges = onChanges;
+        $ctrl.tasks = [];
 
-        $ctrl.index = $ctrl.index;
+        $ctrl.$onInit = onInit;
+
+        $ctrl.uuid = $ctrl.uuid;
 
         $ctrl.editTask = editTask;
 
-        $ctrl.close = close;
+        $ctrl.closeTaskEditor = closeTaskEditor;
 
-        $ctrl.deleteTask = deleteTask;
+        $ctrl.deleteTodo = deleteTodo;
         
         //////////////////////////////
 
-        function onChanges () {
-            $ctrl.tasks = todoService.getTodos();
-            $ctrl.task = todoService.getTodo($ctrl.index);
+        function onInit () {
+            todoService.getTodos()
+                .then((response)=>{
+                    $ctrl.tasks = response;
+                    $scope.$apply();
+                });
         }
 
-        function editTask () {
-            todoService.updateTask($ctrl.index, $ctrl.task, true);
-            todoService.closeTaskEditor($ctrl.index, false);
-
-            $http.post("http://localhost:3000/todo/edit/"+$ctrl.index, {
-                newTodo: $ctrl.task
-            })
-            .then(function(response) {
-                if (response.status == 200) {
-                    $location.path('/todo');
-                } else {
-                    $location.path('/login');
-                }
-            });
-
+        function editTask (uuid, task) {
+            todoService.updateTodo(uuid, task, true)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                        close(uuid);
+                    }
+                });
         }
 
-        function close (index) {
-            todoService.closeTaskEditor(index, false);
+        function closeTaskEditor (uuid) {
+            todoService.updateTodo(uuid, false);
         }
 
-        function deleteTask (index) {
-            todoService.deleteTask(index);
-
-            $http.get("http://localhost:3000/todo/delete/"+index)
-            .then(function(response) {
-                if (response.status == 200) {
-                    $location.path('/todo');
-                } else {
-                    $location.path('/login');
-                }
-            });
+        function deleteTodo (uuid) {
+            todoService.deleteTodo(uuid)
+                .then((response) => {
+                    if (response.status === 200) {
+                        $scope.$apply();
+                    }
+                });
         }
 
     }

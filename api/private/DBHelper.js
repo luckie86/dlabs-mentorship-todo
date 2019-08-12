@@ -73,26 +73,28 @@ class DBHelper {
         }    
     }
 
-    deleteTodo (index) {
+    deleteTodo (uuid) {
         let currentModel = this.model;
-        let newTodos = currentModel.todos.filter((item) => item.id !== index);       
+        let newTodos = currentModel.todos.filter((todo) => todo.uuid !== uuid);       
         currentModel.todos = newTodos;
         this.saveModel(currentModel);    
     }
 
-    editTodo (index, newTodo) {
-        let currentModel = this.model;
-        let todoToEdit = currentModel.todos.filter((item) => item.id === index);
-        currentModel.todos.splice(index, 1);
-        todoToEdit[0].todo = newTodo.newTodo;
-        currentModel.todos.push(todoToEdit[0]);
-        this.saveModel(currentModel);
+    editTodo (uuid, text, userId, done, edit) {
+        this.deleteTodo(uuid);
+        let todoToEdit = this.model.todos.filter((todo) => todo.uuid === uuid);
+        todoToEdit.text = text;
+        this.saveTodo(uuid, todoToEdit.text, userId, done, edit);
     }
 
-    saveTodo(todoUUID, newTodo, currentUserId) {
-        let currentModel = this.model;
-        currentModel.todos.push({id:todoUUID, todo: newTodo, userId: currentUserId});
-        this.saveModel(currentModel);
+    saveTodo(uuid, text, userId, done, edit) {
+        if(!uuid || !text || !userId) {
+            return false;
+        } else {
+            this.model.todos.push({uuid, text, userId, done, edit});
+            this.saveModel(this.model);
+            return true;
+        }
     }
 
 }

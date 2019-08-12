@@ -12,27 +12,27 @@
                     </div>
                 </div>
             </div>
-
+        
             <ul class="list-group" ng-show="$ctrl.tasks.length">
                 <li class="list-group-item" ng-repeat="todo in $ctrl.tasks"> 
-                    <p class="">{{todo.todo}}</p>
-                    <div class="">
+                    <p>{{todo.text}}</p>
+                    <div>
                         <button 
                             class="btn btn-warning" 
-                            ng-click="$ctrl.editTask($index)"
-                            ui-sref="todo.edit.id({ todoId: $index })"
+                            ng-click="$ctrl.editTask(todo.uuid)"
+                            ui-sref="todo.edit.uuid({ uuid: todo.uuid })"
                         >
                             Edit 
                         </button>
                         <button 
-                            ng-click="$ctrl.doneTask($index)" 
+                            ng-click="$ctrl.doneTask(todo.uuid)" 
                             class="btn btn-success" 
                             ng-show="!todo.done"
                         >
                             Done
                         </button>
                         <button
-                            ng-click="$ctrl.unDoneTask($index)" 
+                            ng-click="$ctrl.unDoneTask(todo.uuid)" 
                             class="btn btn-primary" 
                             ng-show="todo.done"
                         >
@@ -40,7 +40,7 @@
                         </button>
                         <button 
                             class="btn btn-danger"
-                            ng-click="$ctrl.deleteTask($index)"
+                            ng-click="$ctrl.deleteTodo(todo.uuid)"
                         >
                             Delete
                         </button>
@@ -51,11 +51,11 @@
 
         <div
             ng-repeat="task in $ctrl.tasks"
-            ng-if="$ctrl.tasks[$index].edit" 
+            ng-if="task.edit" 
             class="col-6">
             <div class="card">
                 <ui-view
-                    index="$index"
+                    uuid="task.uuid"
                 >
                 </ui-view>
             </div>
