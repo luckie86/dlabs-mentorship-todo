@@ -16,17 +16,22 @@
         
         var $ctrl = this;
 
+        $ctrl.$onInit = onInit;
+
         $ctrl.login = login;
 
         $ctrl.register = register;
         
         //////////////////////////////
         
-        // on init
-
-        // pogledaš v local storage in preveriš če je tam, v tem primeru ga redidrektaš na /todo
-        // v nasporotnem pa na /login
-
+        function onInit () {
+            let token = window.localStorage.getItem("token");
+                if (token) {
+                    $location.path('/todo');
+                } else {
+                    $location.path('/authentication-wall');
+                }
+        }
 
         function login () {
             $http.post("http://localhost:3000/auth/login", { 
@@ -59,10 +64,6 @@
             });
         }
 
-        function randomId () {
-            var Id = Math.floor(Math.random()*1000);
-            return Id;
-        }
     }
 
 })();

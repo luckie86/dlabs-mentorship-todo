@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'CoreModule', 'MainModule', 'LoginModule', 'SharedModule']);
+        .module('app', ['ui.router', 'CoreModule', 'MainModule', 'LoginModule', 'SharedModule', 'AuthenticationModule']);
 })();

@@ -1,1 +1,39 @@
-{"users":[{"id":436,"user":"tina","password":"d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3","timestamp":"2019-07-11T07:54:17.482Z"},{"id":54,"user":"luka","password":"$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW","timestamp":"2019-07-29T14:31:36.033Z"}],"todos":[{"uuid":"5fcaec93-2d02-4d13-aeeb-d874f171c759","text":"buy beer","userId":54,"done":false,"edit":false},{"uuid":"5785ba84-bc41-48b8-b1cb-678933269f4d","text":"buy car","userId":54,"done":false,"edit":false},{"uuid":"4cc17027-2608-4f88-bf38-45844979ac02","text":"buy meat","userId":54,"done":false,"edit":false},{"uuid":"99d1312b-f5b2-42db-9620-4e7d7406f50c","text":"buy water","userId":54,"done":false,"edit":false}]}
+{
+    "users": [
+        {
+            "id": 436,
+            "user": "tina",
+            "password": "d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3",
+            "timestamp": "2019-07-11T07:54:17.482Z"
+        },
+        {
+            "id": 54,
+            "user": "luka",
+            "password": "$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW",
+            "timestamp": "2019-07-29T14:31:36.033Z"
+        }
+    ],
+    "todos": [
+        {
+            "uuid": "5785ba84-bc41-48b8-b1cb-678933269f4d",
+            "text": "buy car",
+            "userId": 54,
+            "done": false,
+            "edit": false
+        },
+        {
+            "uuid": "4cc17027-2608-4f88-bf38-45844979ac02",
+            "text": "buy meat",
+            "userId": 54,
+            "done": false,
+            "edit": false
+        },
+        {
+            "uuid": "99d1312b-f5b2-42db-9620-4e7d7406f50c",
+            "text": "buy water",
+            "userId": 54,
+            "done": false,
+            "edit": false
+        }
+    ]
+}

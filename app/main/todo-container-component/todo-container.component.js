@@ -35,11 +35,17 @@
         //////////////////////////////
 
         function onInit () {
-            todoService.getTodos()
+            let token = window.localStorage.getItem('token');
+            if (token) {
+                todoService.getTodos()
                 .then((response) => {
                     $ctrl.tasks = response;
                     $scope.$apply();
                 });
+            } else {
+                $location.path('/authentication-wall')
+            }
+            
         }
 
         function addTask () {
