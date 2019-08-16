@@ -19,7 +19,6 @@ class JWTHelper {
         
     }
 
-
     createJWTwithPromise(data) {
         return new Promise(function (resolve, reject) {
             jwt.sign(data, hashedPrivateKey, { algorithm: 'HS256' }, function (err, token) {

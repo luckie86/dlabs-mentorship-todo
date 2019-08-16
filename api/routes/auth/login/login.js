@@ -45,12 +45,3 @@ router.post('/', function(req, res, next) {
 });
 
 module.exports = router;
-
-
-/*
-
-compareHash()
-    .then(...)
-    .then(...)
-    .then(...)
-    .catch(...) */
