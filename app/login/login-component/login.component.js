@@ -12,7 +12,7 @@
         .module('LoginModule')
         .component('loginComponent', loginComponent);
 
-    function loginController(userService, $location, $http) {
+    function loginController($location, $http) {
         
         var $ctrl = this;
 
@@ -29,7 +29,7 @@
                 if (token) {
                     $location.path('/todo');
                 } else {
-                    $location.path('/authentication-wall');
+                    $location.path('/login');
                 }
         }
 

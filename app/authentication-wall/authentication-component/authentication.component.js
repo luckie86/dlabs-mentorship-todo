@@ -12,7 +12,7 @@
         .module('LoginModule')
         .component('authenticationWallComponent', authenticationWallComponent);
 
-    function AuthenticationController (userService, $location, $http) {
+    function AuthenticationController ($location, $http) {
         
         var $ctrl = this;
 
@@ -32,7 +32,7 @@
         }
 
         function loginOrRegister () {
-            $location.path('/login')
+            $location.path('/login');
         }
 
     }
