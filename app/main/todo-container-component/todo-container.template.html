@@ -17,24 +17,25 @@
                 <li class="list-group-item" ng-repeat="todo in $ctrl.tasks"> 
                     <p>{{todo.text}}</p>
                     <div>
-                        <button 
+                        <button
+                            ng-click="$ctrl.editTask(todo)"
+                            ng-model="openTaskEditor"
                             class="btn btn-warning" 
-                            ng-click="$ctrl.editTask(todo.uuid)"
                             ui-sref="todo.edit.uuid({ uuid: todo.uuid })"
                         >
                             Edit 
                         </button>
                         <button 
-                            ng-click="$ctrl.doneTask(todo.uuid)" 
+                            ng-click="$ctrl.doneTask(todo)" 
                             class="btn btn-success" 
-                            ng-show="!todo.done"
+                            ng-show="!$ctrl.task.done"
                         >
                             Done
                         </button>
                         <button
-                            ng-click="$ctrl.unDoneTask(todo.uuid)" 
+                            ng-click="$ctrl.doneTask(todo)" 
                             class="btn btn-primary" 
-                            ng-show="todo.done"
+                            ng-show="$ctrl.task.done"
                         >
                             Undo 
                         </button>
@@ -50,13 +51,10 @@
         </div>
 
         <div
-            ng-repeat="task in $ctrl.tasks"
-            ng-if="task.edit" 
-            class="col-6">
+            class="col-6"
+        >
             <div class="card">
-                <ui-view
-                    uuid="task.uuid"
-                >
+                <ui-view>
                 </ui-view>
             </div>
         </div>

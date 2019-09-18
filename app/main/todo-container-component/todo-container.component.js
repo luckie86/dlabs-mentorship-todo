@@ -12,13 +12,19 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, tokenService, $scope, $http, $location) {
+    function todoContainerController(todoService, $transitions, $location) {
         
         var $ctrl = this;
 
-        $ctrl.task = $ctrl.task;
+        $ctrl.taskToEdit;
         
         $ctrl.tasks = [];
+
+        $ctrl.token;
+
+        $ctrl.edit = false;
+
+        $ctrl.done = false;
 
         $ctrl.$onInit = onInit;
 
@@ -28,70 +34,68 @@
 
         $ctrl.doneTask = doneTask;
 
-        $ctrl.unDoneTask = unDoneTask;
-
         $ctrl.deleteTodo = deleteTodo;
         
         //////////////////////////////
 
-        function onInit () {
-            let token = window.localStorage.getItem('token');
-            if (token) {
+        $transitions.onSuccess({}, function(trans) {
+            if (trans._targetState._identifier === 'todo') {
                 todoService.getTodos()
                 .then((response) => {
-                    $ctrl.tasks = response;
-                    $scope.$apply();
+                    $ctrl.tasks = response.data;
+                }); 
+            }
+          });
+
+        function onInit () {
+            $ctrl.token = window.localStorage.getItem('token');
+            if ($ctrl.token) {
+                todoService.getTodos()
+                .then((response) => {
+                    $ctrl.tasks = response.data;
                 });
             } else {
                 $location.path('/authentication-wall')
             }
-            
         }
-
+    
         function addTask () {
             todoService.saveTodo($ctrl.task)
                 .then((response) => {
                     if (response.status === 200) {
-                        $scope.$apply();
+                        todoService.getTodos()
+                        .then((response) => {
+                            $ctrl.tasks = response.data;
+                        })
                     }
                 });
         }
 
-        function editTask (uuid) {
-            // HACK ???
-            var filteredTask = $ctrl.tasks.filter((task) => task.uuid === uuid);
-            var task = filteredTask[0].text;
-            todoService.updateTodo(uuid, task, false, true)
-                .then((response) => {
-                    if (response.status === 200) {
-                        $scope.$apply();
-                    }
-                });
+        function editTask (task) {
+            if(!$ctrl.edit) {
+                $ctrl.taskToEdit = task;
+                $ctrl.edit = true;
+            } else {
+                $ctrl.edit = false;
+            }
         }
 
-        function doneTask (uuid) {
-            todoService.updateTodo(uuid, $ctrl.task, true, false)
-            .then((response) => {
-                if (response.status === 200) {
-                    $scope.$apply();
-                }
-            });
-        }
-
-        function unDoneTask (uuid) {
-            todoService.updateTodo(uuid, $ctrl.task, false, false)
-                .then((response) => {
-                    if (response.status === 200) {
-                        $scope.$apply();
-                    }
-                });
+        function doneTask (task) {
+            if(!$ctrl.done) {
+                $ctrl.done = true;
+            } else {
+                $ctrl.done = false;
+            }
         }
 
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
                 .then((response) => {
                     if (response.status === 200) {
-                        $scope.$apply();
+                        todoService.getTodos()
+                        .then((response) => {
+                            $ctrl.tasks = response.data;
+                        })
                     }
                 });
         }

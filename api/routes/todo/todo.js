@@ -62,8 +62,9 @@ router.post('/edit/:id', function(req, res, next) {
     let currentUserId = req.decodedToken.userId;
     let uuid = req.params.id;
     let newTodo = req.body;
-    dbHelper.editTodo(uuid, newTodo.text, currentUserId, newTodo.done, newTodo.edit); 
-    return res.status(200).send({message: "successfuly edited"});
+    dbHelper.editTodo(uuid, newTodo.text, currentUserId, newTodo.done, newTodo.edit);
+    let todoToSend = dbHelper.getTodo(uuid);
+    return res.status(200).send(todoToSend);
 });
 
 // Delete todo with id
@@ -74,10 +75,9 @@ router.post('/delete/:id', function(req, res, next) {
 });
 
 /* GET todo. */
-router.get('/:id', function(req, res, next) {
+router.get('/edit/:id', function(req, res, next) {
     let uuid = req.params.id;
-    let todos = dbHelper.getTodos();
-    let todo = todos.find((todo) => todo.uuid === uuid) || {};
+    let todo = dbHelper.getTodo(uuid);
     return res.status(200).send(todo);
 });
 

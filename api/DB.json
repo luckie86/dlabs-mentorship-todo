@@ -15,22 +15,29 @@
     ],
     "todos": [
         {
-            "uuid": "5785ba84-bc41-48b8-b1cb-678933269f4d",
-            "text": "buy car",
+            "uuid": "3b447564-31dc-407a-aed3-cf3f5cdad10e",
+            "text": "buy milk",
             "userId": 54,
             "done": false,
             "edit": false
         },
         {
-            "uuid": "4cc17027-2608-4f88-bf38-45844979ac02",
-            "text": "buy meat",
+            "uuid": "01c5266c-7889-42d0-9da6-5922a8dee0ed",
+            "text": "buy choco",
             "userId": 54,
             "done": false,
             "edit": false
         },
         {
-            "uuid": "99d1312b-f5b2-42db-9620-4e7d7406f50c",
-            "text": "buy water",
+            "uuid": "39e254d7-c934-4066-92c5-7ba002196cf7",
+            "text": "buy chips",
+            "userId": 54,
+            "done": false,
+            "edit": false
+        },
+        {
+            "uuid": "0b6b050c-233a-4425-822e-cfd0cabb9a5f",
+            "text": "buy nutella",
             "userId": 54,
             "done": false,
             "edit": false

@@ -3,7 +3,6 @@
 
     var editSidePanelComponent = {
         bindings: {
-            uuid: "<"
         },
         templateUrl: 'shared/edit-sidepanel-component/edit-sidepanel.template.html',
         controller: editSidePanelController
@@ -13,56 +12,54 @@
         .module('SharedModule')
         .component('editSidePanelComponent', editSidePanelComponent);
 
-    function editSidePanelController(todoService, $http, $location, $scope) {
+    function editSidePanelController(todoService, $state ,$stateParams, $location, $scope) {
         
         var $ctrl = this;
 
         $ctrl.tasks = [];
 
-        $ctrl.$onInit = onInit;
+        $ctrl.newTask = $ctrl.newTask;
 
-        $ctrl.uuid = $ctrl.uuid;
+        $ctrl.$onInit = onInit;
 
         $ctrl.editTask = editTask;
 
         $ctrl.closeTaskEditor = closeTaskEditor;
 
         $ctrl.deleteTodo = deleteTodo;
+
+        $ctrl.openCloseTask 
         
         //////////////////////////////
 
         function onInit () {
-            todoService.getTodos()
-                .then((response)=>{
-                    $ctrl.tasks = response;
-                    $scope.$apply();
-                });
+            todoService.getTodo($stateParams.uuid)
+            .then((response) => {
+                $ctrl.task = response.data;
+            })
         }
 
-        function editTask (uuid) {
-            todoService.updateTodo(uuid, $ctrl.task, false, true)
-                .then((response) => {
-                    if (response.status === 200) {
-                        $scope.$apply();
-                    }
-                });
+        function editTask (task) {
+            todoService.updateTodo(task.uuid, $ctrl.newTask.text, false, true)
+            .then((response, error) => {
+                if(response.status === 200) {
+                    $state.go('todo');
+                    closeTaskEditor(task.uuid);
+                } else {
+                    console.log(error);
+                }
+            });
         }
 
         function closeTaskEditor (uuid) {
-            todoService.updateTodo(uuid, $ctrl.task, false, false)
-                .then((response) => {
-                    if (response.status === 200) {
-                        $scope.$apply();
-                    }
-                });
+            $ctrl.editTask = false;
         }
 
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
                 .then((response) => {
                     if (response.status === 200) {
-                        $scope.$apply();
-                    }
+                        $ctrl.task = response.data.filter(task=>task.uuid !== uuid);                    }
                 });
         }
 

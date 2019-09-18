@@ -1,34 +1,33 @@
-<div ng-repeat="todo in $ctrl.tasks">
-    <div ng-if="todo.edit">
-        <div class="form">
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="$ctrl.task" placeholder="{{todo.text}}">
-            </div>
+<div> 
+    <div class="form">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="$ctrl.newTask.text" placeholder="{{$ctrl.task[0].text}}">
         </div>
-        <ul class="list-group" >
-            <li class="list-group-item" ng-show="todo.edit"> 
-                <p class="">{{todo.text}}</p>
-                <div class="">
-                    <button 
-                        class="btn btn-warning" 
-                        ng-click="$ctrl.editTask(todo.uuid)"
-                    >
-                        Update 
-                    </button>
-                    <button 
-                        ng-click="$ctrl.closeTaskEditor(todo.uuid)" 
-                        class="btn btn-primary"
-                    >
-                        Close
-                    </button>
-                    <button 
-                        class="btn btn-danger"
-                        ng-click="$ctrl.deleteTodo(todo.uuid)"
-                    >
-                        Delete
-                    </button>
-                </div>
-            </li>
-        </ul>
     </div>
+    <ul class="list-group" >
+        <li class="list-group-item"> 
+            <p class="">{{$ctrl.task.text}}</p>
+            <div class="">
+                <button 
+                    class="btn btn-warning" 
+                    ng-click="$ctrl.editTask($ctrl.task)"
+                >
+                    Update 
+                </button>
+                <button 
+                    ng-click="$ctrl.closeTaskEditor($ctrl.task.uuid)" 
+                    class="btn btn-primary"
+                >
+                    Close
+                </button>
+                <button 
+                    class="btn btn-danger"
+                    ng-click="$ctrl.deleteTodo($ctrl.task.uuid)"
+                >
+                    Delete
+                </button>
+            </div>
+        </li>
+    </ul>
 </div>
+
