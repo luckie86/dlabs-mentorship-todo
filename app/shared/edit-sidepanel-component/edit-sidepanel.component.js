@@ -12,7 +12,7 @@
         .module('SharedModule')
         .component('editSidePanelComponent', editSidePanelComponent);
 
-    function editSidePanelController(todoService, $state ,$stateParams, $location, $scope) {
+    function editSidePanelController(todoService, $state ,$stateParams) {
         
         var $ctrl = this;
 
@@ -40,7 +40,7 @@
         }
 
         function editTask (task) {
-            todoService.updateTodo(task.uuid, $ctrl.newTask.text, false, true)
+            todoService.updateTodo(task.uuid, $ctrl.newTask.text)
             .then((response, error) => {
                 if(response.status === 200) {
                     $state.go('todo');

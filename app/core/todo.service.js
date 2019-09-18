@@ -8,7 +8,7 @@
         function todoService ($http) {
             
             function saveTodo (todo) {
-                return $http.post("http://localhost:3000/todo/save", {"text": todo, "done": false, "edit": false});
+                return $http.post("http://localhost:3000/todo/save", {"text": todo});
             }
 
             function getTodos () {
@@ -24,7 +24,7 @@
             }
 
             function updateTodo (uuid, text, done, edit) {
-                return $http.post(`http://localhost:3000/todo/edit/${uuid}`, {"uuid": uuid, "text": text, "done": done, "edit": edit});
+                return $http.post(`http://localhost:3000/todo/edit/${uuid}`, {"uuid": uuid, "text": text});
             }
 
             return {

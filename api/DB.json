@@ -17,30 +17,27 @@
         {
             "uuid": "3b447564-31dc-407a-aed3-cf3f5cdad10e",
             "text": "buy milk",
-            "userId": 54,
-            "done": false,
-            "edit": false
+            "userId": 54
         },
         {
             "uuid": "01c5266c-7889-42d0-9da6-5922a8dee0ed",
             "text": "buy choco",
-            "userId": 54,
-            "done": false,
-            "edit": false
+            "userId": 54
         },
         {
             "uuid": "39e254d7-c934-4066-92c5-7ba002196cf7",
             "text": "buy chips",
-            "userId": 54,
-            "done": false,
-            "edit": false
+            "userId": 54
         },
         {
             "uuid": "0b6b050c-233a-4425-822e-cfd0cabb9a5f",
-            "text": "buy nutella",
-            "userId": 54,
-            "done": false,
-            "edit": false
+            "text": "buy viki krema",
+            "userId": 54
+        },
+        {
+            "uuid": "fad6c055-ceb5-45a3-9e9a-8728c796260c",
+            "text": "buy beer",
+            "userId": 54
         }
     ]
 }
