@@ -43,24 +43,24 @@
             todoService.updateTodo(task.uuid, $ctrl.newTask.text)
             .then((response, error) => {
                 if(response.status === 200) {
-                    $state.go('todo');
-                    closeTaskEditor(task.uuid);
+                    closeTaskEditor();
                 } else {
                     console.log(error);
                 }
             });
         }
 
-        function closeTaskEditor (uuid) {
-            $ctrl.editTask = false;
-        }
-
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
                 .then((response) => {
                     if (response.status === 200) {
-                        $ctrl.task = response.data.filter(task=>task.uuid !== uuid);                    }
+                        closeTaskEditor();
+                    }
                 });
+        }
+
+        function closeTaskEditor () {
+            $state.go('todo');
         }
 
     }

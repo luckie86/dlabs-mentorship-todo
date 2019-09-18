@@ -25,18 +25,13 @@
             "userId": 54
         },
         {
-            "uuid": "39e254d7-c934-4066-92c5-7ba002196cf7",
-            "text": "buy chips",
-            "userId": 54
-        },
-        {
-            "uuid": "0b6b050c-233a-4425-822e-cfd0cabb9a5f",
-            "text": "buy viki krema",
-            "userId": 54
-        },
-        {
-            "uuid": "fad6c055-ceb5-45a3-9e9a-8728c796260c",
+            "uuid": "fb73d22f-8a41-4e2f-9663-b5dd31b785a3",
             "text": "buy beer",
+            "userId": 54
+        },
+        {
+            "uuid": "c1fb29bc-0a24-4587-bfdc-0f9e731e47e6",
+            "text": "buy smoki",
             "userId": 54
         }
     ]
