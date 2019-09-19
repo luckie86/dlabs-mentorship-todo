@@ -81,14 +81,14 @@
         }
 
         function doUndoTask (uuid) {
-            document.getElementById("btn-"+uuid).innerHTML = 
-            document.getElementById("btn-"+uuid).innerHTML == "Done" ? "Undo" : "Done";
-            if (document.getElementById("btn-"+uuid).classList.contains("btn-success")) {
-                document.getElementById("btn-"+uuid).classList.remove("btn-success");
-                document.getElementById("btn-"+uuid).classList.add("btn-primary");
-            } else {
+            if (document.getElementById("btn-"+uuid).innerHTML.trim() == "ToDo") {
                 document.getElementById("btn-"+uuid).classList.remove("btn-primary");
                 document.getElementById("btn-"+uuid).classList.add("btn-success");
+                document.getElementById("btn-"+uuid).innerHTML = "Done";
+            } else if (document.getElementById("btn-"+uuid).innerHTML.trim() == "Done") {
+                document.getElementById("btn-"+uuid).classList.remove("btn-success");
+                document.getElementById("btn-"+uuid).classList.add("btn-primary");
+                document.getElementById("btn-"+uuid).innerHTML = "ToDo";
             }
         }
 
