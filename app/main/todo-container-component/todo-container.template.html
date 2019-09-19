@@ -25,19 +25,12 @@
                         >
                             Edit 
                         </button>
-                        <button 
-                            ng-click="$ctrl.doneTask(todo)" 
+                        <button
+                            id="btn-{{todo.uuid}}"
+                            ng-click="$ctrl.doUndoTask(todo.uuid)"
                             class="btn btn-success" 
-                            ng-show="!$ctrl.task.done"
                         >
                             Done
-                        </button>
-                        <button
-                            ng-click="$ctrl.doneTask(todo)" 
-                            class="btn btn-primary" 
-                            ng-show="$ctrl.task.done"
-                        >
-                            Undo 
                         </button>
                         <button 
                             class="btn btn-danger"

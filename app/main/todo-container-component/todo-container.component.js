@@ -12,7 +12,7 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, $transitions, $location) {
+    function todoContainerController(todoService, $transitions, $location, $animate, $element) {
         
         var $ctrl = this;
 
@@ -32,7 +32,7 @@
 
         $ctrl.editTask = editTask;
 
-        $ctrl.doneTask = doneTask;
+        $ctrl.doUndoTask = doUndoTask;
 
         $ctrl.deleteTodo = deleteTodo;
         
@@ -80,11 +80,15 @@
             }
         }
 
-        function doneTask (task) {
-            if(!$ctrl.done) {
-                $ctrl.done = true;
+        function doUndoTask (uuid) {
+            document.getElementById("btn-"+uuid).innerHTML = 
+            document.getElementById("btn-"+uuid).innerHTML == "Done" ? "Undo" : "Done";
+            if (document.getElementById("btn-"+uuid).classList.contains("btn-success")) {
+                document.getElementById("btn-"+uuid).classList.remove("btn-success");
+                document.getElementById("btn-"+uuid).classList.add("btn-primary");
             } else {
-                $ctrl.done = false;
+                document.getElementById("btn-"+uuid).classList.remove("btn-primary");
+                document.getElementById("btn-"+uuid).classList.add("btn-success");
             }
         }
 
