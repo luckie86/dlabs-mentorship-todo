@@ -5,7 +5,7 @@
         .module('AuthenticationModule')
         .config(authenticationRoute);
 
-    function authenticationRoute ($locationProvider, $urlRouterProvider , $stateProvider) {
+    function authenticationRoute ($urlRouterProvider , $stateProvider) {
         
         var authenticationWall = {
             name: "authenticationWall",

@@ -50,14 +50,13 @@
 
         function register () {
             $http.post("http://localhost:3000/auth/register", {
-                id: randomId(),
                 userName: $ctrl.userName,
                 password: $ctrl.password
             })
                 .then(function(response) {
                     if (response.status == 200) {
                         window.localStorage.setItem("token", response.data);
-                        $location.path('/todo');
+                        $location.path('/authentication-wall');
                     } else {
                         $location.path('/login');
                     }

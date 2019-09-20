@@ -12,7 +12,7 @@
         .module('LoginModule')
         .component('authenticationWallComponent', authenticationWallComponent);
 
-    function AuthenticationController ($location, $http) {
+    function AuthenticationController ($location) {
         
         var $ctrl = this;
 

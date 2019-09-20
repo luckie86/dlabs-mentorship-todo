@@ -35,9 +35,9 @@
 ✓  jwt + middleware + interceptor + localstorage
 ✓  promisi na apiju
 ✓   res.send brez return
--  RESTFUL API'S (poprabi put delete patch)
+✓  RESTFUL API'S (poprabi put delete patch)
 ✓  implementiraj bcrypt
--  codecleanup (ni anonimih funckij) popravi naming
+✓  codecleanup (ni anonimih funckij) popravi naming
 ✓  Implementiraj bcrypt v login, register routo (naredi dve metodi v security helperju create hash pa compoare hash    ki vrneta promise)
 ✓  Spremeni frontend da bo bral iz DB Json todoje
 
@@ -48,5 +48,5 @@
 
 ✓  naredi si da bo dbjson imel pravilni naming ()
 ✓  naredi da bodo vsi endopoint razen login in register (authentication wall)
-7. dodaj midleware na vse route
-8. naredi da bo edit in delete za samo za tiste todoje katere si ustvaril ti (ostalo je error)
+✓ dodaj midleware na vse route
+✓ naredi da bo edit in delete za samo za tiste todoje katere si ustvaril ti (ostalo je error)

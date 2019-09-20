@@ -20,11 +20,11 @@
             }
 
             function deleteTodo (uuid) {
-                return $http.post(`http://localhost:3000/todo/delete/${uuid}`);
+                return $http.delete(`http://localhost:3000/todo/delete/${uuid}`);
             }
 
-            function updateTodo (uuid, text, done, edit) {
-                return $http.post(`http://localhost:3000/todo/edit/${uuid}`, {"uuid": uuid, "text": text});
+            function updateTodo (uuid, text) {
+                return $http.put(`http://localhost:3000/todo/edit/${uuid}`, {"uuid": uuid, "text": text});
             }
 
             return {
@@ -37,5 +37,4 @@
 
         }
         
-
 })();

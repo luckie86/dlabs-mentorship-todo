@@ -15,7 +15,7 @@ router.get('/:id', function(req, res, next) {
     var id = parseInt(req.params.id, 10);
     if (!typeof id == "number" || id !== null) { 
         var users = dbHelper.getUsers();
-        let user = users.find((user) => user.id === id) || {};
+        var user = users.find((user) => user.id === id) || {};
         return res.status(200).send(user);
     } else {
         res.sendStatus(404);

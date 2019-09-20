@@ -25,10 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// var dbHelper = new DBHelper();
 setTimeout(()=> {
-    console.log(dbHelper.getModel())
-
+    dbHelper.getModel()
 }, 200)
 
 // Routes

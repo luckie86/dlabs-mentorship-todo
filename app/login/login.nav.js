@@ -5,7 +5,7 @@
         .module('LoginModule')
         .config(loginRoute);
 
-    function loginRoute($locationProvider, $urlRouterProvider , $stateProvider) {
+    function loginRoute($urlRouterProvider , $stateProvider) {
         
         var login = {
             name: "login",

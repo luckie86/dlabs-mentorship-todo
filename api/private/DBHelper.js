@@ -89,8 +89,8 @@ class DBHelper {
         this.saveModel(currentModel);    
     }
 
-    editTodo (uuid, text, userId, done, edit) {
-        let todos = this.model.todos.map((todo)=>{
+    editTodo (uuid, text) {
+        this.model.todos.map((todo)=>{
             if(todo.uuid === uuid) {
                 todo.text = text;
                 return todo;
@@ -98,15 +98,14 @@ class DBHelper {
                 return todo;
             }
         })
-        console.log("filtered todos",todos);
         this.saveModel(this.model);
     }
 
-    saveTodo(uuid, text, userId, done, edit) {
+    saveTodo(uuid, text, userId) {
         if(!uuid || !text || !userId) {
             return false;
         } else {
-            this.model.todos.push({uuid, text, userId, done, edit});
+            this.model.todos.push({uuid, text, userId});
             this.saveModel(this.model);
             return true;
         }

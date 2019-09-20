@@ -7,11 +7,11 @@ var JWTHelper = require('../../../private/JWTHelper');
 
 /* POST user. */
 router.post('/', function(req, res, next) {
-    let data = req.body;
-    let timeStamp = new Date(Date.now());
+    var data = req.body;
+    var timeStamp = new Date(Date.now());
     securityHelper.createBcryptHash(data.password).then((hashedPassword) => {
         if (data) {
-            dbHelper.updateModel({ id: data.id, user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
+            dbHelper.updateModel({ id: randomId(), user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
             let userToken = {
                 userId: data.id,
                 userName: data.userName,
@@ -27,10 +27,11 @@ router.post('/', function(req, res, next) {
         }
     }).catch((err) => {
         console.log(err);
-    }); 
-
-
+    });
     
+    function randomId () {
+        return Math.floor(Math.random()*1000);
+    }
 
 });
 

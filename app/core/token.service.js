@@ -5,8 +5,7 @@
         .module('CoreModule')
         .factory("tokenService", tokenService);
     
-        function tokenService ($http) {
-            
+        function tokenService () {
 
             function getToken () {
                 currentUserToken = window.localStorage.getItem("token");
@@ -17,7 +16,6 @@
                 window.localStorage.setItem("token", token);
             } 
            
-
             return {
                 getToken: getToken,
                 setToken: setToken

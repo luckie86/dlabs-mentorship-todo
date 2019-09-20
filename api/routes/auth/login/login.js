@@ -27,14 +27,12 @@ router.post('/', function(req, res, next) {
                         res.status(400).send(err);
                     });
             } else {
-                // return res.sendStatus(401);
                 throw "invalid login";
 
             }
     
         })
         .catch((err)=>{
-            console.log(err);
             res.status(400).send(err);
         })
         
