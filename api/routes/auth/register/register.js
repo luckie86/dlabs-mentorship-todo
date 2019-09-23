@@ -11,9 +11,10 @@ router.post('/', function(req, res, next) {
     var timeStamp = new Date(Date.now());
     securityHelper.createBcryptHash(data.password).then((hashedPassword) => {
         if (data) {
-            dbHelper.updateModel({ id: randomId(), user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
+            let newUserId = randomId();
+            dbHelper.updateModel({id: newUserId, user: data.userName, password: hashedPassword, timestamp: timeStamp}, null);
             let userToken = {
-                userId: data.id,
+                userId: newUserId,
                 userName: data.userName,
             }
             

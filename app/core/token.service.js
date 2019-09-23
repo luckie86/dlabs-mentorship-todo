@@ -8,12 +8,11 @@
         function tokenService () {
 
             function getToken () {
-                currentUserToken = window.localStorage.getItem("token");
-                return currentUserToken;
+                return window.localStorage.getItem("token");
             }
             
             function setToken(token) {
-                window.localStorage.setItem("token", token);
+                return window.localStorage.setItem("token", token);
             } 
            
             return {

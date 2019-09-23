@@ -12,7 +12,7 @@
         .module('LoginModule')
         .component('loginComponent', loginComponent);
 
-    function loginController($location, $http) {
+    function loginController ($location, loginService, tokenService) {
         
         var $ctrl = this;
 
@@ -25,7 +25,7 @@
         //////////////////////////////
         
         function onInit () {
-            let token = window.localStorage.getItem("token");
+            let token = tokenService.getToken();
                 if (token) {
                     $location.path('/todo');
                 } else {
@@ -34,13 +34,10 @@
         }
 
         function login () {
-            $http.post("http://localhost:3000/auth/login", { 
-                userName: $ctrl.userName, 
-                password: $ctrl.password 
-            })
+            loginService.login($ctrl.userName, $ctrl.password)
                 .then(function(response) {
                     if (response.status == 200) {
-                        window.localStorage.setItem("token",response.data);
+                        tokenService.setToken(response.data);
                         $location.path('/todo');
                     } else {
                         $location.path('/login');
@@ -49,16 +46,13 @@
         }
 
         function register () {
-            $http.post("http://localhost:3000/auth/register", {
-                userName: $ctrl.userName,
-                password: $ctrl.password
-            })
+            loginService.register($ctrl.userName, $ctrl.password)
                 .then(function(response) {
                     if (response.status == 200) {
-                        window.localStorage.setItem("token", response.data);
-                        $location.path('/authentication-wall');
-                    } else {
+                        tokenService.setToken(response.data);
                         $location.path('/login');
+                    } else {
+                        $location.path('/todo');
                     }
             });
         }

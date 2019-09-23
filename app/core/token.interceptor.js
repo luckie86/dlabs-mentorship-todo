@@ -3,10 +3,10 @@
 
     angular
         .module('CoreModule')
-        .factory("tokenInterceptor", function () {
+        .factory("tokenInterceptor", function (tokenService) {
             return {
                 request: function (config) {
-                    let token = window.localStorage.getItem("token");
+                    let token = tokenService.getToken();
                     if (token) {
                         config.headers.token = token;
                     }

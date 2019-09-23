@@ -5,14 +5,14 @@
         bindings: {
         },
         templateUrl: '/authentication-wall/authentication-component/authentication.template.html',
-        controller: AuthenticationController 
+        controller: authenticationController 
     };
 
     angular
         .module('LoginModule')
         .component('authenticationWallComponent', authenticationWallComponent);
 
-    function AuthenticationController ($location) {
+    function authenticationController ($location, tokenService) {
         
         var $ctrl = this;
 
@@ -23,7 +23,7 @@
         //////////////////////////////
         
         function onInit () {
-            let token = window.localStorage.getItem("token");
+            let token = tokenService.getToken();
             if (token) {
                 $location.path('/todo');
             } else {

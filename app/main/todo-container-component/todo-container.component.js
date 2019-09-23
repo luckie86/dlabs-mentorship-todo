@@ -12,15 +12,13 @@
         .module('SharedModule')
         .component('todoContainerComponent', todoContainerComponent);
 
-    function todoContainerController(todoService, $transitions, $location, $animate, $element) {
+    function todoContainerController (todoService, $transitions, $location, tokenService) {
         
         var $ctrl = this;
 
         $ctrl.taskToEdit;
         
         $ctrl.tasks = [];
-
-        $ctrl.token;
 
         $ctrl.edit = false;
 
@@ -48,8 +46,8 @@
           });
 
         function onInit () {
-            $ctrl.token = window.localStorage.getItem('token');
-            if ($ctrl.token) {
+            let token = tokenService.getToken();
+            if (token) {
                 todoService.getTodos()
                 .then((response) => {
                     $ctrl.tasks = response.data;
