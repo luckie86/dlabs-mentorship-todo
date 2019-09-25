@@ -39,8 +39,12 @@
         $transitions.onSuccess({}, function(trans) {
             if (trans._targetState._identifier === 'todo') {
                 todoService.getTodos()
-                .then((response) => {
-                    $ctrl.tasks = response.data;
+                .then((response, error) => {
+                    if (response.status == 200) {
+                        $ctrl.tasks = response.data;
+                    } else {
+                        console.log(error);
+                    }
                 }); 
             }
           });
@@ -49,8 +53,12 @@
             let token = tokenService.getToken();
             if (token) {
                 todoService.getTodos()
-                .then((response) => {
-                    $ctrl.tasks = response.data;
+                .then((response, error) => {
+                    if (response.status == 200) {
+                        $ctrl.tasks = response.data;
+                    } else {
+                        console.log(error);
+                    }
                 });
             } else {
                 $location.path('/authentication-wall')
@@ -58,13 +66,20 @@
         }
     
         function addTask () {
-            todoService.saveTodo($ctrl.task)
-                .then((response) => {
+            todoService.saveTodo($ctrl.task, false)
+                .then((response, error) => {
                     if (response.status === 200) {
                         todoService.getTodos()
-                        .then((response) => {
-                            $ctrl.tasks = response.data;
+                        .then((response, error) => {
+                            if (response) {
+                                $ctrl.tasks = response.data;
+                            } else {
+                                console.log(error);
+                            }
+                            
                         })
+                    } else {
+                        console.log(error);
                     }
                 });
         }
@@ -78,26 +93,38 @@
             }
         }
 
-        function doUndoTask (uuid) {
-            if (document.getElementById("btn-"+uuid).innerHTML.trim() == "ToDo") {
-                document.getElementById("btn-"+uuid).classList.remove("btn-primary");
-                document.getElementById("btn-"+uuid).classList.add("btn-success");
-                document.getElementById("btn-"+uuid).innerHTML = "Done";
-            } else if (document.getElementById("btn-"+uuid).innerHTML.trim() == "Done") {
-                document.getElementById("btn-"+uuid).classList.remove("btn-success");
-                document.getElementById("btn-"+uuid).classList.add("btn-primary");
-                document.getElementById("btn-"+uuid).innerHTML = "ToDo";
-            }
+        function doUndoTask (todo, done) {
+            todoService.updateTodo(todo.uuid, todo.text, done)
+            .then((response, error) => {
+                if (response.status == 200) {
+                    todoService.getTodos()
+                    .then((response) => {
+                        if (response.status == 200) {
+                            $ctrl.tasks = response.data;
+                        } else {
+                            console.log(error);
+                        }
+                    })
+                } else {
+                    console.log(error);
+                }
+            })
         }
 
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
-                .then((response) => {
+                .then((response, error) => {
                     if (response.status === 200) {
                         todoService.getTodos()
-                        .then((response) => {
-                            $ctrl.tasks = response.data;
+                        .then((response, error) => {
+                            if (response.statuts == 200) {
+                                $ctrl.tasks = response.data;
+                            } else {
+                                console.log(error);
+                            }
                         })
+                    } else {
+                        console.log(error);
                     }
                 });
         }

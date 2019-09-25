@@ -40,7 +40,7 @@
         }
 
         function editTask (task) {
-            todoService.updateTodo(task.uuid, $ctrl.newTask.text)
+            todoService.updateTodo(task.uuid, $ctrl.newTask.text, task.done)
             .then((response, error) => {
                 if(response.status === 200) {
                     closeTaskEditor();
@@ -52,9 +52,11 @@
 
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
-                .then((response) => {
+                .then((response, error) => {
                     if (response.status === 200) {
                         closeTaskEditor();
+                    } else {
+                        console.log(error);
                     }
                 });
         }

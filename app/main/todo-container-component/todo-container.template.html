@@ -26,15 +26,22 @@
                             Edit 
                         </button>
                         <button
-                            id="btn-{{todo.uuid}}"
-                            ng-click="$ctrl.doUndoTask(todo.uuid)"
+                            ng-if="!todo.done"
+                            ng-click="$ctrl.doUndoTask(todo, true)"
                             class="btn btn-primary"
                         >
-                            ToDo
+                            To Do
+                        </button>
+                        <button
+                            ng-if="todo.done"
+                            ng-click="$ctrl.doUndoTask(todo, false)"
+                            class="btn btn-success"
+                        >
+                            Done
                         </button>
                         <button 
-                            class="btn btn-danger"
                             ng-click="$ctrl.deleteTodo(todo.uuid)"
+                            class="btn btn-danger"
                         >
                             Delete
                         </button>

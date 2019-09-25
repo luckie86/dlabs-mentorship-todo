@@ -83,16 +83,22 @@ class DBHelper {
     }
 
     deleteTodo (uuid) {
-        let currentModel = this.model;
-        let newTodos = currentModel.todos.filter((todo) => todo.uuid !== uuid);       
-        currentModel.todos = newTodos;
-        this.saveModel(currentModel);    
+        if (!uuid) {
+            return false;
+        } else {
+            let currentModel = this.model;
+            let newTodos = currentModel.todos.filter((todo) => todo.uuid !== uuid);       
+            currentModel.todos = newTodos;
+            this.saveModel(currentModel);
+            return true;    
+        }
     }
 
-    editTodo (uuid, text) {
+    editTodo (uuid, text, userId, done) {
         this.model.todos.map((todo)=>{
             if(todo.uuid === uuid) {
                 todo.text = text;
+                todo.done = done;
                 return todo;
             } else {
                 return todo;
@@ -101,11 +107,11 @@ class DBHelper {
         this.saveModel(this.model);
     }
 
-    saveTodo(uuid, text, userId) {
+    saveTodo(uuid, text, userId, done) {
         if(!uuid || !text || !userId) {
             return false;
         } else {
-            this.model.todos.push({uuid, text, userId});
+            this.model.todos.push({uuid, text, userId, done});
             this.saveModel(this.model);
             return true;
         }

@@ -1,1 +1,96 @@
-{"users":[{"id":436,"user":"tina","password":"d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3","timestamp":"2019-07-11T07:54:17.482Z"},{"id":54,"user":"luka","password":"$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW","timestamp":"2019-07-29T14:31:36.033Z"},{"id":162,"user":"manja","password":"$2b$10$o.quAMetbL9O4mFKCtFN3eqizFh8eUh3M5xO5DR120NMfrFo5g.VO","timestamp":"2019-09-20T06:18:47.172Z"},{"id":980,"user":"nina","password":"$2b$10$.xNnFrHe.zsx0aFQmauI..4fwhYhj1RtmyZUkwRroTOIHYpVbW2PS","timestamp":"2019-09-22T11:26:41.955Z"},{"id":220,"user":"nejc","password":"$2b$10$HY/vodAL3c.rg2YAs5ZQS.VZ74NzizO1e82wyX4h8wGqmEbGUvy9O","timestamp":"2019-09-23T08:03:55.612Z"},{"id":172,"user":"miha","password":"$2b$10$1QagMgPY2O8lgzHvkoWZQ.9OWLCbicuDeocLtuNJfvtyMwvvFAI0i","timestamp":"2019-09-23T08:04:47.689Z"}],"todos":[{"uuid":"3b447564-31dc-407a-aed3-cf3f5cdad10e","text":"buy milk","userId":54},{"uuid":"01c5266c-7889-42d0-9da6-5922a8dee0ed","text":"buy choco","userId":54},{"uuid":"c3e44aca-d81b-494a-8d6a-609321cb36b5","text":"buy juice","userId":54},{"uuid":"6b37af44-4f2c-4d4f-aedb-1ab4c11f399f","text":"buy groceries","userId":54},{"uuid":"9b7f2f73-3865-4ad5-9a30-6e8c62fc6604","text":"buy makeup","userId":162},{"uuid":"a619a8be-c28b-43a0-b1a8-77738e88357a","text":"buy shoes","userId":162},{"uuid":"c8628599-5d21-424f-a402-26ed3b67417d","text":"buy bitcoin","userId":980},{"uuid":"13651a90-1c14-4eb2-a244-1e27c7594794","text":"todo","userId":220}]}
+{
+    "users": [
+        {
+            "id": 436,
+            "user": "tina",
+            "password": "d6ba8bf227ba2c637c444a9f59764f28da0e06c868770f1be41278c536efb6b3",
+            "timestamp": "2019-07-11T07:54:17.482Z"
+        },
+        {
+            "id": 54,
+            "user": "luka",
+            "password": "$2b$10$z22OMn/7NzYJMa6UYF4.s.krYxv8G1VulGt8T4ROMeKbaBssZN7rW",
+            "timestamp": "2019-07-29T14:31:36.033Z"
+        },
+        {
+            "id": 162,
+            "user": "manja",
+            "password": "$2b$10$o.quAMetbL9O4mFKCtFN3eqizFh8eUh3M5xO5DR120NMfrFo5g.VO",
+            "timestamp": "2019-09-20T06:18:47.172Z"
+        },
+        {
+            "id": 980,
+            "user": "nina",
+            "password": "$2b$10$.xNnFrHe.zsx0aFQmauI..4fwhYhj1RtmyZUkwRroTOIHYpVbW2PS",
+            "timestamp": "2019-09-22T11:26:41.955Z"
+        },
+        {
+            "id": 220,
+            "user": "nejc",
+            "password": "$2b$10$HY/vodAL3c.rg2YAs5ZQS.VZ74NzizO1e82wyX4h8wGqmEbGUvy9O",
+            "timestamp": "2019-09-23T08:03:55.612Z"
+        },
+        {
+            "id": 172,
+            "user": "miha",
+            "password": "$2b$10$1QagMgPY2O8lgzHvkoWZQ.9OWLCbicuDeocLtuNJfvtyMwvvFAI0i",
+            "timestamp": "2019-09-23T08:04:47.689Z"
+        }
+    ],
+    "todos": [
+        {
+            "uuid": "3b447564-31dc-407a-aed3-cf3f5cdad10e",
+            "text": "buy milk",
+            "userId": 54,
+            "done": true
+        },
+        {
+            "uuid": "01c5266c-7889-42d0-9da6-5922a8dee0ed",
+            "text": "buy choco",
+            "userId": 54,
+            "done": true
+        },
+        {
+            "uuid": "c3e44aca-d81b-494a-8d6a-609321cb36b5",
+            "text": "buy juice",
+            "userId": 54,
+            "done": true
+        },
+        {
+            "uuid": "9b7f2f73-3865-4ad5-9a30-6e8c62fc6604",
+            "text": "buy makeup",
+            "userId": 162,
+            "done": true
+        },
+        {
+            "uuid": "a619a8be-c28b-43a0-b1a8-77738e88357a",
+            "text": "buy shoes",
+            "userId": 162,
+            "done": true
+        },
+        {
+            "uuid": "c8628599-5d21-424f-a402-26ed3b67417d",
+            "text": "buy bitcoin",
+            "userId": 980,
+            "done": true
+        },
+        {
+            "uuid": "13651a90-1c14-4eb2-a244-1e27c7594794",
+            "text": "todo",
+            "userId": 220,
+            "done": true
+        },
+        {
+            "uuid": "6b5ed4ab-6c1f-425f-931c-995872a771e0",
+            "text": "buy nutella",
+            "userId": 54,
+            "done": false
+        },
+        {
+            "uuid": "bd13e7b5-ee71-47ab-a399-de8c88a35f1d",
+            "text": "buy broccoli",
+            "userId": 54,
+            "done": false
+        }
+    ]
+}
