@@ -81,14 +81,14 @@
             "done": true
         },
         {
-            "uuid": "6b5ed4ab-6c1f-425f-931c-995872a771e0",
-            "text": "buy nutella",
+            "uuid": "8a868f69-fac1-4a20-9e48-bb01e08a3b1b",
+            "text": "buy salad",
             "userId": 54,
             "done": false
         },
         {
-            "uuid": "bd13e7b5-ee71-47ab-a399-de8c88a35f1d",
-            "text": "buy broccoli",
+            "uuid": "65450ed3-e02f-4d8c-bfe6-637b9a38f444",
+            "text": "buy nutella",
             "userId": 54,
             "done": false
         }

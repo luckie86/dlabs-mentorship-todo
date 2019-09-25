@@ -114,10 +114,10 @@
         function deleteTodo (uuid) {
             todoService.deleteTodo(uuid)
                 .then((response, error) => {
-                    if (response.status === 200) {
+                    if (response.status == 200) {
                         todoService.getTodos()
                         .then((response, error) => {
-                            if (response.statuts == 200) {
+                            if (response.status == 200) {
                                 $ctrl.tasks = response.data;
                             } else {
                                 console.log(error);
