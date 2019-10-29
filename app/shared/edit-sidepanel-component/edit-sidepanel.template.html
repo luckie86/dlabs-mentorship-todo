@@ -1,0 +1,33 @@
+<div> 
+    <div class="form">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="$ctrl.newTask.text" placeholder="{{$ctrl.task[0].text}}">
+        </div>
+    </div>
+    <ul class="list-group" >
+        <li class="list-group-item"> 
+            <p class="">{{$ctrl.task.text}}</p>
+            <div class="">
+                <button 
+                    class="btn btn-warning" 
+                    ng-click="$ctrl.editTask($ctrl.task)"
+                >
+                    Update 
+                </button>
+                <button 
+                    ng-click="$ctrl.closeTaskEditor($ctrl.task.uuid)" 
+                    class="btn btn-primary"
+                >
+                    Close
+                </button>
+                <button 
+                    class="btn btn-danger"
+                    ng-click="$ctrl.deleteTodo($ctrl.task.uuid)"
+                >
+                    Delete
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+

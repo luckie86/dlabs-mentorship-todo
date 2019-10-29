@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.task">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="$ctrl.addTask()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Task</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        
+            <ul class="list-group" ng-show="$ctrl.tasks.length">
+                <li class="list-group-item" ng-repeat="todo in $ctrl.tasks"> 
+                    <p>{{todo.text}}</p>
+                    <div>
+                        <button
+                            ng-click="$ctrl.editTask(todo)"
+                            ng-model="openTaskEditor"
+                            class="btn btn-warning" 
+                            ui-sref="todo.edit.uuid({ uuid: todo.uuid })"
+                        >
+                            Edit 
+                        </button>
+                        <button
+                            ng-if="!todo.done"
+                            ng-click="$ctrl.doUndoTask(todo, true)"
+                            class="btn btn-primary"
+                        >
+                            To Do
+                        </button>
+                        <button
+                            ng-if="todo.done"
+                            ng-click="$ctrl.doUndoTask(todo, false)"
+                            class="btn btn-success"
+                        >
+                            Done
+                        </button>
+                        <button 
+                            ng-click="$ctrl.deleteTodo(todo.uuid)"
+                            class="btn btn-danger"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div
+            class="col-6"
+        >
+            <div class="card">
+                <ui-view>
+                </ui-view>
+            </div>
+        </div>
+        
+    </div>
+</div>    
